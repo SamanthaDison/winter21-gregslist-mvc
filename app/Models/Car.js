@@ -27,6 +27,7 @@ export class Car {
             <p class="m-0">Color:</p>
             <div class="color-box border border-dark" style="background-color: ${this.color};"></div>
           </div>
+          <i class="mdi mdi-pencil selectable" onclick="app.carsController.editCar('${this.id}')"></i>
           <i class="mdi mdi-delete selectable" onclick="app.carsController.removeCar('${this.id}')"></i>
         </div>
       </div>

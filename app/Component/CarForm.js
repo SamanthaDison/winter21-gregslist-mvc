@@ -1,6 +1,10 @@
-export function getCarform() {
+import { Car } from "../Models/Car.js"
+
+export function getCarform(carData = {}) {
+  const newCar = new Car(carData)
+
   return `
-  <form onsubmit="app.carsController.createCar()">
+  <form onsubmit="app.carsController.createCar('${newCar.id}')">
   <div class="mb-3 d-flex justify-content-between">
     <div>
       <label for="make" class="form-label">Make</label>

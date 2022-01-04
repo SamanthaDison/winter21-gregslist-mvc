@@ -10,7 +10,6 @@ class CarsService {
     ProxyState.cars = res.data.map(c => new Car(c))
   }
 
-
   async removeCar(id) {
     const res = await api.delete(`cars/${id}`)
     console.log('deleting this car', res)
@@ -19,13 +18,24 @@ class CarsService {
     // if(car){
     // }  
   }
-  createCar(carData) {
-    const car = new Car(carData)
+
+  async createCar(carData) {
+    const res = await api.post('cars', carData)
+    console.log('creating this car', res.data)
+    // const car = new Car(carData)
     // ProxyState.cars.push(car)
     // ProxyState.cars = ProxyState.cars
-    ProxyState.cars = [...ProxyState.cars, car]
+    ProxyState.cars = [new Car(res.data), ...ProxyState.cars]
   }
 
+  async editCar(id, carData) {
+    const res = await api.put(`cars/${id}`, carData)
+    console.log('editing this car', res.data)
+    let index = ProxyState.cars.findIndex(c => c.id == id)
+    ProxyState.cars.splice(index, 1, new Car(res.data))
+    ProxyState.cars = ProxyState.cars
+
+  }
 
 }
 
